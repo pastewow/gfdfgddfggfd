@@ -387,10 +387,9 @@ end
 
 -- // Notification Function
 local function sendNotification(player)
-    local Name = player.Name
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Selected";
-        Text = "Selected " .. player.DisplayName;
+        Text = "Selected " .. player;
         Duration = 2;
     })
 end
@@ -440,11 +439,13 @@ function Aiming.GetClosestPlayerToCursor()
 
                     print(Player.Name)
                     print(TargetPart)
-                    getgenv().SelectedP = Player.Name
+                    getgenv().SelectedP = Player.DisplayName
                     print('Global: ' .. getgenv().SelectedP)
                     spawn(function()
-                        wait(0.3)
-                        sendNotification(getgenv().SelectedP)
+                        wait(0.7)
+                        local SelectedPlayer = getgenv().SelectedP
+                        print('Selected: ' .. SelectedPlayer)
+                        sendNotification(tostring(SelectedPlayer))
                     end)
                     
                 end
