@@ -418,7 +418,7 @@ function Aiming.GetClosestPlayerToCursor()
         if (Aiming.IsIgnored(Player) == false and Character) then
             -- // Vars
             local TargetPartTemp, _, _, Magnitude = Aiming.GetClosestTargetPartToCursor(Character)
-            print(TargetPartTemp)
+            print('TargetPartTemp: ' .. TargetPartTemp.Name)
             -- // Check if part exists and health
             if (TargetPartTemp and Aiming.CheckHealth(Player)) then
                 -- // Check if is in FOV
