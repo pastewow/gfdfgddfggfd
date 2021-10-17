@@ -1,5 +1,6 @@
 getgenv().EnableKey = false
 getgenv().DisableKey = false
+getgenv().SelectedP = ""
 
 if getgenv().Aiming then return getgenv().Aiming end
 
@@ -439,10 +440,11 @@ function Aiming.GetClosestPlayerToCursor()
 
                     print(Player.Name)
                     print(TargetPart)
-                    print('Global: ' .. getgenv().Selected)
+                    getgenv().SelectedP = Player.Name
+                    print('Global: ' .. getgenv().SelectedP)
                     spawn(function()
                         wait(0.3)
-                        sendNotification(getgenv().Selected)
+                        sendNotification(getgenv().SelectedP)
                     end)
                     
                 end
