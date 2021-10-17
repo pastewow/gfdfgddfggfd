@@ -68,29 +68,29 @@ getgenv().AimingB = {
         }
     }
 }
-local Aiming = getgenv().AimingB
+local AimingB = getgenv().AimingB
 
 -- // Create circle
 local circle = Drawingnew("Circle")
 circle.Transparency = 1
 circle.Thickness = 2
-circle.Color = Aiming.FOVColour
+circle.Color = AimingB.FOVColour
 circle.Filled = false
-Aiming.FOVCircle = circle
+AimingB.FOVCircle = circle
 
 -- // Update
-function Aiming.UpdateFOV()
+function AimingB.UpdateFOV()
     -- // Make sure the circle exists
     if not (circle) then
         return
     end
 
     -- // Set Circle Properties
-    circle.Visible = Aiming.ShowFOV
-    circle.Radius = (Aiming.FOV * 3)
+    circle.Visible = AimingB.ShowFOV
+    circle.Radius = (AimingB.FOV * 3)
     circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
-    circle.NumSides = Aiming.FOVSides
-    circle.Color = Aiming.FOVColour
+    circle.NumSides = AimingB.FOVSides
+    circle.Color = AimingB.FOVColour
 
     -- // Return circle
     return circle
@@ -109,7 +109,7 @@ local CalcChance = function(percentage)
 end
 
 -- // Customisable Checking Functions: Is a part visible
-function Aiming.IsPartVisible(Part, PartDescendant)
+function AimingB.IsPartVisible(Part, PartDescendant)
     -- // Vars
     local Character = LocalPlayer.Character or CharacterAddedWait(CharacterAdded)
     local Origin = CurrentCamera.CFrame.Position
@@ -141,9 +141,9 @@ function Aiming.IsPartVisible(Part, PartDescendant)
 end
 
 -- // Ignore player
-function Aiming.IgnorePlayer(Player)
+function AimingB.IgnorePlayer(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = AimingB.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Find player in table
@@ -160,9 +160,9 @@ function Aiming.IgnorePlayer(Player)
 end
 
 -- // Unignore Player
-function Aiming.UnIgnorePlayer(Player)
+function AimingB.UnIgnorePlayer(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = AimingB.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Find player in table
@@ -180,9 +180,9 @@ function Aiming.UnIgnorePlayer(Player)
 end
 
 -- // Ignore team
-function Aiming.IgnoreTeam(Team, TeamColor)
+function AimingB.IgnoreTeam(Team, TeamColor)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = AimingB.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Find team in table
@@ -199,9 +199,9 @@ function Aiming.IgnoreTeam(Team, TeamColor)
 end
 
 -- // Unignore team
-function Aiming.UnIgnoreTeam(Team, TeamColor)
+function AimingB.UnIgnoreTeam(Team, TeamColor)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = AimingB.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Find team in table
@@ -219,18 +219,18 @@ function Aiming.UnIgnoreTeam(Team, TeamColor)
 end
 
 -- //  Toggle team check
-function Aiming.TeamCheck(Toggle)
+function AimingB.TeamCheck(Toggle)
     if (Toggle) then
-        return Aiming.IgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
+        return AimingB.IgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
     end
 
-    return Aiming.UnIgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
+    return AimingB.UnIgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
 end
 
 -- // Check teams
-function Aiming.IsIgnoredTeam(Player)
+function AimingB.IsIgnoredTeam(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = AimingB.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Check if team is ignored
@@ -246,9 +246,9 @@ function Aiming.IsIgnoredTeam(Player)
 end
 
 -- // Check if player (and team) is ignored
-function Aiming.IsIgnored(Player)
+function AimingB.IsIgnored(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = AimingB.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Loop
@@ -265,11 +265,11 @@ function Aiming.IsIgnored(Player)
     end
 
     -- // Team check
-    return Aiming.IsIgnoredTeam(Player)
+    return AimingB.IsIgnoredTeam(Player)
 end
 
 -- // Get the Direction, Normal and Material
-function Aiming.Raycast(Origin, Destination, UnitMultiplier)
+function AimingB.Raycast(Origin, Destination, UnitMultiplier)
     if (typeof(Origin) == "Vector3" and typeof(Destination) == "Vector3") then
         -- // Handling
         if (not UnitMultiplier) then UnitMultiplier = 1 end
@@ -292,14 +292,14 @@ function Aiming.Raycast(Origin, Destination, UnitMultiplier)
 end
 
 -- // Get Character
-function Aiming.Character(Player)
+function AimingB.Character(Player)
     return Player.Character
 end
 
 -- // Check Health
-function Aiming.CheckHealth(Player)
+function AimingB.CheckHealth(Player)
     -- // Get Humanoid
-    local Character = Aiming.Character(Player)
+    local Character = AimingB.Character(Player)
     local Humanoid = FindFirstChildWhichIsA(Character, "Humanoid")
 
     -- // Get Health
@@ -310,14 +310,14 @@ function Aiming.CheckHealth(Player)
 end
 
 -- // Check if silent aim can used
-function Aiming.Check()
-    return (Aiming.Enabled == true and Aiming.Selected ~= LocalPlayer and Aiming.SelectedPart ~= nil)
+function AimingB.Check()
+    return (AimingB.Enabled == true and AimingB.Selected ~= LocalPlayer and AimingB.SelectedPart ~= nil)
 end
-Aiming.checkSilentAim = Aiming.Check
+AimingB.checkSilentAim = AimingB.Check
 
 -- // Get Closest Target Part
-function Aiming.GetClosestTargetPartToCursor(Character)
-    local TargetParts = Aiming.TargetPart
+function AimingB.GetClosestTargetPartToCursor(Character)
+    local TargetParts = AimingB.TargetPart
 
     -- // Vars
     local ClosestPart = nil
@@ -396,17 +396,17 @@ end
 
 
 -- // Silent Aim Function
-function Aiming.GetClosestPlayerToCursor()
+function AimingB.GetClosestPlayerToCursor()
     -- // Vars
     local TargetPart = nil
     local ClosestPlayer = nil
-    local Chance = CalcChance(Aiming.HitChance)
+    local Chance = CalcChance(AimingB.HitChance)
     local ShortestDistance = 1/0
 
     -- // Chance
     if (not Chance) then
-        Aiming.Selected = LocalPlayer
-        Aiming.SelectedPart = nil
+        AimingB.Selected = LocalPlayer
+        AimingB.SelectedPart = nil
 
         return LocalPlayer
     end
@@ -414,21 +414,21 @@ function Aiming.GetClosestPlayerToCursor()
     -- // Loop through all players
     for _, Player in ipairs(GetPlayers(Players)) do
         -- // Get Character
-        local Character = Aiming.Character(Player)
+        local Character = AimingB.Character(Player)
 
         
         -- // Make sure isn't ignored and Character exists
-        if (Aiming.IsIgnored(Player) == false and Character) then
+        if (AimingB.IsIgnored(Player) == false and Character) then
             -- // Vars
-            local TargetPartTemp, _, _, Magnitude = Aiming.GetClosestTargetPartToCursor(Character)
+            local TargetPartTemp, _, _, Magnitude = AimingB.GetClosestTargetPartToCursor(Character)
 
             -- // Check if part exists and health
-            if (TargetPartTemp and Aiming.CheckHealth(Player)) then
+            if (TargetPartTemp and AimingB.CheckHealth(Player)) then
                 -- // Check if is in FOV
               if getgenv().AimingB.Enabled then
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
-                    if (Aiming.VisibleCheck and not Aiming.IsPartVisible(TargetPartTemp, Character)) then continue end
+                    if (AimingB.VisibleCheck and not AimingB.IsPartVisible(TargetPartTemp, Character)) then continue end
 
                     -- // Set vars
                    
@@ -455,13 +455,13 @@ function Aiming.GetClosestPlayerToCursor()
     end
 
     -- // End
-    Aiming.Selected = ClosestPlayer
-    Aiming.SelectedPart = TargetPart
+    AimingB.Selected = ClosestPlayer
+    AimingB.SelectedPart = TargetPart
 end
 
 -- // Heartbeat Function
 Heartbeat:Connect(function()
-    Aiming.UpdateFOV()
+    AimingB.UpdateFOV()
     --Aiming.GetClosestPlayerToCursor()
 end)
 
@@ -483,13 +483,13 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
             getgenv().EnableKey = false
             print('Ran first one.')
             print('Looking for player...')
-            Aiming.GetClosestPlayerToCursor()
+            AimingB.GetClosestPlayerToCursor()
         elseif getgenv().EnableKey == false then
             print('Started to run disable.')
             getgenv().EnableKey = true
             getgenv().AimingB.Enabled = false
             sendDisabled()
-            Aiming.GetClosestPlayerToCursor()
+            AimingB.GetClosestPlayerToCursor()
         end
     end
 end)
@@ -497,6 +497,6 @@ end)
 
 
 -- //
-return Aiming
+return AimingB
 
 -- // If you want the examples, look at the docs.
