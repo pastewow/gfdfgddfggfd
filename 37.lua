@@ -437,14 +437,14 @@ function AimingB.GetClosestPlayerToCursor()
                     ShortestDistance = Magnitude
                     TargetPart = TargetPartTemp
 
-                    print(Player.Name)
-                    print(TargetPart)
+                    --print(Player.Name)
+                    --print(TargetPart)
                     getgenv().SelectedP = Player.DisplayName
-                    print('Global: ' .. getgenv().SelectedP)
+                    --print('Global: ' .. getgenv().SelectedP)
                     spawn(function()
                         wait(0.7)
                         local SelectedPlayer = getgenv().SelectedP
-                        print('Selected: ' .. SelectedPlayer)
+                        --print('Selected: ' .. SelectedPlayer)
                         sendNotification(tostring(SelectedPlayer))
                     end)
                     
