@@ -439,7 +439,12 @@ function Aiming.GetClosestPlayerToCursor()
 
                     print(Player.Name)
                     print(TargetPart)
-                    sendNotification(Player)
+                    print('Global: ' .. getgenv().Selected)
+                    spawn(function()
+                        wait(0.3)
+                        sendNotification(getgenv().Selected)
+                    end)
+                    
                 end
             end
         end
