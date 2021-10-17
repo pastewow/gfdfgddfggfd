@@ -2,7 +2,7 @@ getgenv().EnableKey = false
 getgenv().DisableKey = false
 getgenv().SelectedP = ""
 
-if getgenv().Aiming then return getgenv().Aiming end
+if getgenv().AimingB then return getgenv().AimingB end
 
 -- // Services
 local Players = game:GetService("Players")
@@ -38,7 +38,7 @@ local tableremove = table.remove
 local tableinsert = table.insert
 
 -- // Silent Aim Vars
-getgenv().Aiming = {
+getgenv().AimingB = {
     Enabled = true,
 
     ShowFOV = true,
@@ -68,7 +68,7 @@ getgenv().Aiming = {
         }
     }
 }
-local Aiming = getgenv().Aiming
+local Aiming = getgenv().AimingB
 
 -- // Create circle
 local circle = Drawingnew("Circle")
@@ -425,7 +425,7 @@ function Aiming.GetClosestPlayerToCursor()
             -- // Check if part exists and health
             if (TargetPartTemp and Aiming.CheckHealth(Player)) then
                 -- // Check if is in FOV
-              if getgenv().Aiming.Enabled then
+              if getgenv().AimingB.Enabled then
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
                     if (Aiming.VisibleCheck and not Aiming.IsPartVisible(TargetPartTemp, Character)) then continue end
@@ -479,7 +479,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.Q then
         
         if getgenv().EnableKey == true then
-            getgenv().Aiming.Enabled = true
+            getgenv().AimingB.Enabled = true
             getgenv().EnableKey = false
             print('Ran first one.')
             print('Looking for player...')
@@ -487,7 +487,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
         elseif getgenv().EnableKey == false then
             print('Started to run disable.')
             getgenv().EnableKey = true
-            getgenv().Aiming.Enabled = false
+            getgenv().AimingB.Enabled = false
             sendDisabled()
             Aiming.GetClosestPlayerToCursor()
         end
