@@ -474,26 +474,7 @@ local function sendDisabled()
 end
 
 
-spawn(function()
-game:GetService("UserInputService").InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.Q then
-        
-        if getgenv().EnableKey == true then
-            getgenv().AimingB.Enabled = true
-            getgenv().EnableKey = false
-            print('Ran first one.')
-            print('Looking for player...')
-            AimingB.GetClosestPlayerToCursor()
-        elseif getgenv().EnableKey == false then
-            print('Started to run disable.')
-            getgenv().EnableKey = true
-            getgenv().AimingB.Enabled = false
-            sendDisabled()
-            AimingB.GetClosestPlayerToCursor()
-        end
-    end
-end)
-end)
+
 
 
 -- //
