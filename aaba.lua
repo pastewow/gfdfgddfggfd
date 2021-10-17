@@ -1,3 +1,6 @@
+getgenv().EnableKey = false
+getgenv().DisableKey = false
+
 if getgenv().Aiming then return getgenv().Aiming end
 
 -- // Services
@@ -460,10 +463,11 @@ local function sendDisabled()
     })
 end
 
+
 spawn(function()
 game:GetService("UserInputService").InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.Q then
-        getgenv().EnableKey = true
+        
         if getgenv().EnableKey == true then
             getgenv().DisableKey = false 
             getgenv().EnableKey = false
