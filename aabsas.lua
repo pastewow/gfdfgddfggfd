@@ -425,6 +425,7 @@ function Aiming.GetClosestPlayerToCursor()
             -- // Check if part exists and health
             if (TargetPartTemp and Aiming.CheckHealth(Player)) then
                 -- // Check if is in FOV
+              if getgenv().Aiming.Enabled then
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
                     if (Aiming.VisibleCheck and not Aiming.IsPartVisible(TargetPartTemp, Character)) then continue end
@@ -441,6 +442,7 @@ function Aiming.GetClosestPlayerToCursor()
                     sendNotification(Player)
                 end
             end
+        end
         end
     end
 
