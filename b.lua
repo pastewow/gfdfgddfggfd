@@ -419,10 +419,6 @@ function Aiming.GetClosestPlayerToCursor()
             -- // Vars
             local TargetPartTemp, _, _, Magnitude = Aiming.GetClosestTargetPartToCursor(Character)
 
-            if not TargetPartTemp then
-                print('Disabled')
-            end
-
             -- // Check if part exists and health
             if (TargetPartTemp and Aiming.CheckHealth(Player)) then
                 -- // Check if is in FOV
@@ -456,25 +452,30 @@ Heartbeat:Connect(function()
     --Aiming.GetClosestPlayerToCursor()
 end)
 
+local function sendDisabled()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Disabled";
+        Text = "Deselected Users!";
+        Duration = 5;
+    })
+end
 
 spawn(function()
 game:GetService("UserInputService").InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.Q then
-        getgenv().Enabled = true
-        if getgenv().Enabled then
-        getgenv().Disable = false 
-        getgenv().Enabled = false
+        print('Ran first one.')
+        getgenv().EnableKey = true
+        if getgenv().EnableKey == true then
+        getgenv().DisableKey = false 
+        getgenv().EnableKey = false
         print('Looking for player...')
         Aiming.GetClosestPlayerToCursor()
-        else
-            getgenv().Enabled = true
-            getgenv().Disable = true 
+        elseif getgenv().EnableKey == false then
+            print('Started to run disable.')
+            getgenv().EnableKey = true
+            getgenv().DisableKey = true 
+            sendDisabled()
             Aiming.GetClosestPlayerToCursor()
-            game:GetService("StarterGui"):SetCore("SendNotification", {
-                Title = "Disabled";
-                Text = "Deselected Users!";
-                Duration = 5;
-            })
         end
     end
 end)
