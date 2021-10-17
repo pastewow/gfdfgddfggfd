@@ -469,7 +469,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.Q then
         
         if getgenv().EnableKey == true then
-            getgenv().DisableKey = false 
+            getgenv().Aiming.Enabled = true
             getgenv().EnableKey = false
             print('Ran first one.')
             print('Looking for player...')
@@ -477,7 +477,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
         elseif getgenv().EnableKey == false then
             print('Started to run disable.')
             getgenv().EnableKey = true
-            getgenv().DisableKey = true 
+            getgenv().Aiming.Enabled = false
             sendDisabled()
             Aiming.GetClosestPlayerToCursor()
         end
