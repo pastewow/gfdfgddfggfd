@@ -97,9 +97,6 @@ game:GetService("UserInputService").InputEnded:connect(ReleaseD)
 
 game:GetService("UserInputService").InputChanged:connect(CheckFirst)
 
-game:GetService("UserInputService").InputBegan:connect(ChangeFaster)
-game:GetService("UserInputService").InputBegan:connect(ChangeSlower)
-
 
 game:GetService('RunService').Stepped:connect(function()
 if ShiftHeld == true then
