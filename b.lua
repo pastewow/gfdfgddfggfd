@@ -418,7 +418,11 @@ function Aiming.GetClosestPlayerToCursor()
         if (Aiming.IsIgnored(Player) == false and Character) then
             -- // Vars
             local TargetPartTemp, _, _, Magnitude = Aiming.GetClosestTargetPartToCursor(Character)
-            print('TargetPartTemp: ' .. TargetPartTemp.Name)
+
+            if not TargetPartTemp then
+                print('Disabled')
+            end
+
             -- // Check if part exists and health
             if (TargetPartTemp and Aiming.CheckHealth(Player)) then
                 -- // Check if is in FOV
@@ -456,8 +460,22 @@ end)
 spawn(function()
 game:GetService("UserInputService").InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.Q then
+        getgenv().Enabled = true
+        if getgenv().Enabled then
+        getgenv().Disable = false 
+        getgenv().Enabled = false
         print('Looking for player...')
         Aiming.GetClosestPlayerToCursor()
+        else
+            getgenv().Enabled = true
+            getgenv().Disable = true 
+            Aiming.GetClosestPlayerToCursor()
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                Title = "Disabled";
+                Text = "Deselected Users!";
+                Duration = 5;
+            })
+        end
     end
 end)
 end)
