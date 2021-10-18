@@ -1,4 +1,4 @@
-if getgenv().AimingB then return getgenv().AimingB end
+if getgenv().AimingC then return getgenv().AimingC end
 
 -- // Services
 local Players = game:GetService("Players")
@@ -34,7 +34,7 @@ local tableremove = table.remove
 local tableinsert = table.insert
 
 -- // Silent Aim Vars
-getgenv().AimingB = {
+getgenv().AimingC = {
     Enabled = true,
 
     ShowFOV = true,
