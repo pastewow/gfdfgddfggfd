@@ -442,7 +442,7 @@ function AimingB.GetClosestPlayerToCursor()
                     getgenv().SelectedP = Player.DisplayName
                     --print('Global: ' .. getgenv().SelectedP)
                     spawn(function()
-                        wait(0.7)
+                        wait(0.1)
                         local SelectedPlayer = getgenv().SelectedP
                         --print('Selected: ' .. SelectedPlayer)
                         sendNotification(tostring(SelectedPlayer))
